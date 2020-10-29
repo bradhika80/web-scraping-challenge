@@ -1,0 +1,175 @@
+/* back ground color primary */
+.bg-primary{
+    background-color:#007bff!important
+}
+/* back ground color primary */
+a.bg-primary:focus,
+a.bg-primary:hover,
+button.bg-primary:focus,
+button.bg-primary:hover{
+    background-color:#0062cc!important
+}
+/* back ground color primary for nav bar */
+nav.bg-primary {
+    background-color:  rgba(0, 0, 128, 0.863)!important;
+}; 
+/* back ground color secondary */
+.bg-secondary{
+    background-color:#6c757d!important
+}
+/* back ground color secondary */
+a.bg-secondary:focus,
+a.bg-secondary:hover,
+button.bg-secondary:focus,
+button.bg-secondary:hover{
+    background-color:#545b62!important
+}
+
+/* html/body height */
+html, body {
+    height: 100%;
+}
+/* back ground color for the main Element */
+#main {
+    background-size: cover;
+    background-color: #f0f0f0;
+    height: 100%;
+  }
+
+  /* img-small Element */
+.img-small {
+    height :200px;
+    width :250px;
+    padding: 10px;
+}
+
+/* img-thumbnail Element */
+.img-thumbnail {
+    height :150px;
+    width :200px;
+    margin-top: 5%;
+    padding : 2px;
+}
+/* img-large Element */
+.img-large {
+    height :250px;
+    width :400px;
+    padding: 10px;
+}
+
+/* img-medium Element */
+.img-medium {
+    height :200px;
+    width :400px;
+    padding: 10px;
+}
+
+/* box Element */
+.box {
+    height: 225px;
+    padding: 20px;
+    color: rgb(52, 51, 54);
+    background: rgb(249, 250, 252);
+  }
+
+  /* brand Element */
+.brand {
+    width : 100px;
+    text-align: center;
+}
+/* Paragraph Element */
+p{
+    color: #24282c;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px; 
+    padding :1%;
+   }
+
+p.highlight {
+    color: navy;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px; 
+    padding :1%;
+    text-align: justify;
+    font-weight: bold;
+}
+/* sectionheading Class  */
+.sectionheading{
+    color: #0BADA6;  
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-weight: bolder; 
+    
+}
+
+/* sectionsubheading Class  */
+.sectionsubheading{
+    color: #0BADA6;  
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-weight: bolder; 
+    font-size :15px;
+    padding: 1%;
+}
+
+
+.tableHeader {
+    text-align: left;
+    background-color: lightsteelblue;
+}
+
+.div {
+    margin-top: 5px;
+}
+
+h3 
+{
+    color : navy;
+}
+
+
+
+h4 {
+    color : navy;
+}
+
+h5 {
+    color : navy;
+}
+.container {
+    width : 75%;
+}
+/*--------------------------------------------------------------
+# Sections General
+--------------------------------------------------------------*/
+section {
+    padding: 20px 0;
+    overflow: hidden;
+  }
+  
+  .section-bg {
+    background-color: rgb(249, 250, 252)
+  }
+  
+  .section-title {
+    text-align: center;
+    padding-bottom: 30px;
+  }
+  
+  
+  .about .content {
+    padding: 10px;
+    background-color:  rgb(249, 250, 252);
+    color:navy;
+  }
+  
+  .about p {  
+        color: navy;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 15px; 
+        font-weight: bold;
+        text-align: justify;
+        padding :1%;
+   }
+    
+   .jumbotron {
+    background-color: rgb(249, 250, 252)
+  }
