@@ -12,7 +12,7 @@ def init_browser():
     executable_path = {"executable_path": "/usr/local/bin/chromedriver"}
     return Browser("chrome", **executable_path, headless=False)
 
-
+# a method to scrape website
 def scrape(search_term):
 
     #get the browser object
@@ -208,7 +208,7 @@ def scrape(search_term):
     print ("0", "Scraping website successful")
 
 
-
+#  a method to retrieve data
 def GetData ():
 
     try :
