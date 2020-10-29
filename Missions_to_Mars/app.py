@@ -21,48 +21,17 @@ def index():
 
     return render_template('index.html', data=data)
 
+# This route will trigger the webscraping, but it will then send us back to the index route to render the results
+@app.route("/scrape")
+def scrape():
 
-# add the route for drug abuse statistics
-@app.route('/DrugDetails')
-def DrugDeathStatistics():
-    drugDeathStatistics = ds.AllDataStatistics()
-
-    # if data result  is empty return 
-    if (drugDeathStatisticsByState.empty) :
-        return ("Data not found")
-
-    # return the json dataset
-    drugJson = json.dumps(json.loads(drugDeathStatistics.to_json(orient='records')), indent=0)
-    return (drugJson)
-
-
-
-# add the route for drug abuse statistics by state
-@app.route('/DrugDetailsByState/<state>')
-def DeathStatisticsByState(state):
-    try :
-
-        # parse the input parameter
-        resultCode, result = ParseStateList(state)
-
-        #if input parameter does not match the format return error message
-        if (resultCode  == "-1" ):
-            return (result)  
-        
-        # call the method to pull the statistics by state
-        drugDeathStatisticsByState = ds.AllDataStatisticsByState(resultCode, result)
-
-        # if data result  is empty return 
-        if (drugDeathStatisticsByState.empty) :
-            return ("Data not found for queried states")
-
-        # return the json dataset
-        drugJson = json.dumps(json.loads(drugDeathStatisticsByState.to_json(orient='records')), indent=0)
-        return (drugJson)
-
-    except Exception as ex :
-        return (ex) 
-
+    # scrape.scrape() is a custom function that we've defined in the scrape_mars.py file within this directory
+    resultCode, result = scrape.scrape()
+    if (resultCode == "-1") :
+        return(f"{result}")
+    
+    # Use Flask's redirect function to send us to a different route once this task has completed.
+    return redirect("/")
 
 
 
