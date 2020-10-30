@@ -212,6 +212,9 @@ def scrape():
         #insert the dictionary the collection
         collection.insert_one(mars_dict)
 
+        # close the client connection
+        client.close()
+
         return ("Successful")
 
     except Exception as ex:
@@ -235,6 +238,8 @@ def GetData():
 
         # read from mongo
         mars_data = collection.find()
+
+        client.close()
 
         return (mars_data)
 
