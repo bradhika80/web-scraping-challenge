@@ -2,8 +2,11 @@
 
 import numpy as np
 import os
-from flask import Flask, jsonify,render_template
-import scrape_mars as scrape
+from flask import Flask, jsonify,render_template, redirect
+
+import scrape_mars
+
+import pymongo
 
 # Flask Setup
 app = Flask(__name__)
@@ -15,9 +18,7 @@ app = Flask(__name__)
 # add the default route
 @app.route("/")
 def index():
-    resultCode, data = scrape.GetData()
-    if (resultCode == "-1")
-    return (f"{data}")
+    data = scrape_mars.GetData()
 
     return render_template('index.html', data=data)
 
@@ -25,15 +26,15 @@ def index():
 @app.route("/scrape")
 def scrape():
 
-    # scrape.scrape() is a custom function that we've defined in the scrape_mars.py file within this directory
-    resultCode, result = scrape.scrape()
-    if (resultCode == "-1") :
-        return(f"{result}")
-    
-    # Use Flask's redirect function to send us to a different route once this task has completed.
-    return redirect("/")
+    try :
+        # scrape.scrape() is a custom function that we've defined in the scrape_mars.py file within this directory
+        scrape_mars.scrape()
 
-
+        # Use Flask's redirect function to send us to a different route once this task has completed.
+        return redirect("/")
+    except Exception as ex :
+        print (ex)
+        
 
 if __name__ == '__main__':
     app.run(debug=True)

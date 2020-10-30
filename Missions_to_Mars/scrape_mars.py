@@ -8,15 +8,19 @@ import pandas as pd
 
 
 def init_browser():
-    # @NOTE: Replace the path with your actual path to the chromedriver
-    executable_path = {"executable_path": "/usr/local/bin/chromedriver"}
-    return Browser("chrome", **executable_path, headless=False)
+    # Setup configuration variables to enable Splinter to interact with browser
+    executable_path = {'executable_path': 'chromedriver.exe'}
+    browser = Browser('chrome', **executable_path, headless=False)
+    return (browser)
 
 # a method to scrape website
-def scrape(search_term):
+def scrape():
 
     #get the browser object
     browser = init_browser()
+
+    news_title = None
+    news_p = None
 
     # logic to scrape NASA Mars News
     try :
@@ -30,7 +34,7 @@ def scrape(search_term):
         news_html = browser.html
 
         # parse the html into beautiful soup objects
-        news_soup = BeautifulSoup(news_html, "html.parser")
+        news_soup = BeautifulSoup(news_html, "lxml")
 
         # get the div with grid of news articles
         gridList = news_soup.find('div', class_='react_grid_list grid_list_container')
@@ -43,7 +47,6 @@ def scrape(search_term):
 
     except Exception as ex:
         print (ex)
-        return ("-1", "Error while scraping the NASA Mars News website")
 
     # logic to scrape JPL Mars Space Images
     try :
@@ -63,9 +66,7 @@ def scrape(search_term):
         # get the carousel_item
         carousel_item = image_soup.find("article", "carousel_item")
 
-        # get the featured_image_title
-        featured_image_title = image_soup.find("h1", "media_feature_title")
-
+      
         #get the footer a element of the article
         footer_a_item = carousel_item.find("a", "button fancybox")
 
@@ -77,8 +78,8 @@ def scrape(search_term):
         featured_image_url = jpl_url + img_url.replace(substring, '')
 
     except Exception as ex:
-        print(ex)
-        return ("-1", "Error while scraping the JPL Mars Space Images - Featured Image website")
+        print (ex)
+
 
     # logic to scrape  Mars Facts
     try :
@@ -107,8 +108,8 @@ def scrape(search_term):
         mars_fact_table = df[0].to_html(index = False,header=False)
 
     except Exception as ex:
-        print(ex)
-        return ("-1", "Error while scraping the Mars Facts website")
+        print (ex)
+
 
 
     # logic to scrape  Mars Hemispheres
@@ -139,7 +140,11 @@ def scrape(search_term):
         for item in mars_items :
 
             # get the title for image
-            title = item.find('h3').text
+            title_item = item.find('h3')
+            if (title_item != None) :
+                title  = title_item.text
+            else :
+                title = None
 
             #url for the image 
             item_url =  item.find("a")["href"]
@@ -167,11 +172,11 @@ def scrape(search_term):
             hemisphere_image_urls.append(mars_dict)    
 
     except Exception as ex:
-        print(ex)
-        return ("-1", "Error while scraping the Mars Hemispheres website")
+        print (ex)
 
-        # close the browser object
-        browser.quit()
+
+    # close the browser object
+    browser.quit()
 
     
     try :
@@ -180,7 +185,6 @@ def scrape(search_term):
         mars_dict = {
             'news_title' : news_title,
             'news_p': news_p,
-            'featured_image_Title': featured_image_title,
             'featured_image_url': featured_image_url,
             'mars_fact_table': mars_fact_table,
             'hemisphere_image_urls': hemisphere_image_urls
@@ -201,15 +205,16 @@ def scrape(search_term):
         #insert the dictionary the collection
         collection.insert_one(mars_dict)
 
+        return ("Successful")
+
     except Exception as ex:
-        print(ex)
-        return ("-1", "Error while inserting record into mongo collection")
+        print (ex)
     
-    print ("0", "Scraping website successful")
+   
 
 
 #  a method to retrieve data
-def GetData ():
+def GetData():
 
     try :
          # connect to mongo server
@@ -224,12 +229,12 @@ def GetData ():
         # read from mongo
         mars_data = collection.find()
 
-        return ("0", mars_data)
+        return (mars_data)
 
 
     except Exception as ex:
         print(ex)
-        return ("-1", "Error while inserting record into mongo collection")
+        
 
 
 
