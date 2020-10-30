@@ -103,9 +103,16 @@ def scrape():
 
         # read the html and convert to dataframe
         df = pd.read_html(str(table_item))
+        
+        #rename column names
+        df = df[0].rename(columns = {0 : 'Description', 1 : 'Mars'})
+
+        #reset the index 
+        df = df.set_index('Description')
 
         # convert to html
-        mars_fact_table = df[0].to_html(index = False,header=False)
+        mars_fact_table = df.to_html( classes="table table-striped")
+               
 
     except Exception as ex:
         print (ex)
@@ -217,7 +224,7 @@ def scrape():
 def GetData():
 
     try :
-         # connect to mongo server
+        # connect to mongo server
         client = pymongo.MongoClient('mongodb://localhost:27017')
         
         # connect to database

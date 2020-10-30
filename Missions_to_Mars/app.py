@@ -11,6 +11,14 @@ import pymongo
 # Flask Setup
 app = Flask(__name__)
 
+
+# connect to mongo server
+client = pymongo.MongoClient('mongodb://localhost:27017')
+# connect to database
+db = client.marsExpedition_db
+# map mars collection
+collection = db.mars 
+
 #################################################
 # Flask Routes
 #################################################
@@ -18,9 +26,9 @@ app = Flask(__name__)
 # add the default route
 @app.route("/")
 def index():
-    data = scrape_mars.GetData()
-
-    return render_template('index.html', data=data)
+    mars_data = collection.find()
+    print (mars_data[0])
+    return render_template('index.html', my_string="Wheeeee!", data=mars_data)
 
 # This route will trigger the webscraping, but it will then send us back to the index route to render the results
 @app.route("/scrape")

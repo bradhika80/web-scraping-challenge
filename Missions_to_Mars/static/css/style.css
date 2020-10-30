@@ -52,14 +52,14 @@ html, body {
 }
 /* img-large Element */
 .img-large {
-    height :250px;
-    width :400px;
+    height :500px;
+    width :600px;
     padding: 10px;
 }
 
 /* img-medium Element */
 .img-medium {
-    height :200px;
+    height :300px;
     width :400px;
     padding: 10px;
 }
@@ -69,7 +69,7 @@ html, body {
     height: 225px;
     padding: 20px;
     color: rgb(52, 51, 54);
-    background: rgb(249, 250, 252);
+    background: rgb(171, 172, 173);
   }
 
   /* brand Element */
@@ -95,7 +95,7 @@ p.highlight {
 }
 /* sectionheading Class  */
 .sectionheading{
-    color: #0BADA6;  
+    color: navy;  
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-weight: bolder; 
     
@@ -171,5 +171,6 @@ section {
    }
     
    .jumbotron {
-    background-color: rgb(249, 250, 252)
+    background-color:rgba(255, 228, 196, 0.253);
+    height: 225px;
   }
