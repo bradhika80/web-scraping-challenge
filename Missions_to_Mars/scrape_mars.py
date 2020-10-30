@@ -34,16 +34,16 @@ def scrape():
         news_html = browser.html
 
         # parse the html into beautiful soup objects
-        news_soup = BeautifulSoup(news_html, "lxml")
+        news_soup = BeautifulSoup(news_html, "html.parser")
 
         # get the div with grid of news articles
-        gridList = news_soup.find('div', class_='react_grid_list grid_list_container')
-        
+        gridList = news_soup.find_all('div', class_='react_grid_list grid_list_container')
+       
         # get the first title
-        news_title = gridList.find('div', class_='content_title').text
+        news_title = gridList[0].find('div', class_='content_title').text
 
         # get the first title description
-        news_p = gridList.find('div', class_='rollover_description_inner').text
+        news_p = gridList[0].find('div', class_='rollover_description_inner').text
 
     except Exception as ex:
         print (ex)
@@ -64,7 +64,7 @@ def scrape():
         image_soup = BeautifulSoup(image_html,"html.parser")
 
         # get the carousel_item
-        carousel_item = image_soup.find("article", "carousel_item")
+        carousel_item = image_soup.find("article", class_="carousel_item")
 
       
         #get the footer a element of the article
